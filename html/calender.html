@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<style type="text/css">
+	body {
+	font-family: "Ubuntu", sans-serif;
+	display: flex;
+	align-items: stretch;
+	padding: 0;
+	margin: 0;
+}
+
+table,
+td {
+	border: 1px solid #23232324;
+	cursor: copy;
+}
+
+tr {
+	cursor: default;
+}
+
+table {
+	margin: 14px auto;
+	padding: 0.5vh 0.5vh;
+	border-collapse: collapse;
+	box-shadow: 0px 0px 149px -28px #1b19cdd1;
+	border-radius: 20px;
+	overflow: hidden;
+	border-color: transparent;
+}
+.default-cursor {
+	cursor: default;
+}
+
+.center {
+	text-align: center;
+}
+
+.btn {
+	border-radius: 100px;
+	outline: none;
+	margin: 0 auto;
+	background-color: transparent;
+}
+
+.color {
+	color: #fefdfd;
+	background-color: #1b19cd;
+}
+
+.border-color {
+	background-color: #1b19cd;
+}
+
+.off-color {
+	color: #7c7ef8;
+}
+
+#current-day-info {
+	min-height: 100vh;
+	width: 34%;
+}
+
+#current-day-info #app-name-landscape {
+	font-size: 6.2vh;
+	padding: 0.5vh 0 1vh;
+	border-bottom: 1px solid;
+	color: white;
+}
+
+.time {
+	text-align: center;
+	padding-bottom: 5vh;
+	font-size: 3vh;
+	font-weight: lighter;
+	text-shadow: 0px 0px 10px aliceblue;
+	cursor: pointer;
+}
+
+.time:hover,
+.verb {
+	text-decoration-line: underline;
+	text-decoration-style: wavy;
+	text-decoration-color: green;
+}
+
+#current-day-info h2 {
+	font-size: 6.2vh;
+	font-weight: 300;
+	margin: 0 0 3vh;
+	padding-top: 3vh;
+}
+
+#current-day-info h1 {
+	font-size: 6.8vh;
+	font-weight: 600;
+	margin: 4.3vh 0;
+}
+
+#current-day-info #theme-landscape,
+#calender #theme-portrait {
+	display: block;
+	padding: 3vh 4vh;
+	box-shadow: #a9a7a7 0px 0px 91px -5px;
+	/* padding: 16px 38px; */
+	color: #d2cdcd;
+	/* background-color: #e9e7e7; */
+	border: 2px solid transparent;
+	font-size: 2.4vh;
+}
+
+#current-day-info #theme-landscape:hover,
+#calender #theme-portrait:hover {
+	background-color: white;
+	opacity: 0.4;
+	color: black;
+}
+
+#calender {
+	width: 66%;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	/* align-content: center; */
+}
+
+#calender #app-name-portrait {
+	display: none;
+}
+
+#calender #theme-portrait {
+	display: none;
+}
+
+#calender thead tr:first-child th div {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+}
+
+#calender h4 {
+	margin: 0;
+	padding: 0.8vh 0 0.2vh;
+	font-size: 1.4vw;
+	font-weight: 300;
+}
+
+#calender h3 {
+	font-size: 2vw;
+	font-weight: 700;
+	padding: 0 2vw;
+	margin: 0;
+	display: inline-block;
+}
+
+#calender .weekday {
+	font-size: 1.7vw;
+	font-weight: 300;
+	padding: 8px 0 5px;
+}
+
+#calender .icon {
+	font-size: 1.3rem;
+}
+
+#calender .icon:hover {
+	opacity: 0.6;
+}
+
+#calender tbody td {
+	height: 9.2vh;
+	width: 6.5vw;
+	font-size: 1.3vw;
+	font-weight: 600;
+	vertical-align: top;
+	padding: 0.5vw;
+	transition: font-size 0.4s ease;
+}
+
+#calender tbody td:hover {
+	font-size: 2vw;
+}
+
+#calender #current-day {
+	background-color: #e1e1e1;
+}
+
+#calender img {
+	width: 4.7rem;
+	vertical-align: top;
+	position: relative;
+	top: 0.1vw;
+	left: 20px;
+}
+
+#calender .day {
+	display: block;
+	max-height: 10px;
+}
+
+.tooltip {
+	display: none;
+	cursor: none;
+}
+
+@media (orientation: landscape) {
+	.tooltip-container:hover {
+		cursor: pointer;
+	}
+
+	.tooltip-container:hover .tooltip {
+		font-size: 1.1vw;
+		font-weight: initial;
+		display: block;
+		position: absolute;
+		white-space: pre-wrap;
+		background-color: #ededed;
+		color: black;
+		border-radius: 10px;
+		padding: 0.5vw;
+		text-align: center;
+		border: 1px solid #1b19cd14;
+		box-shadow: 0px 3px 12px -6px black;
+	}
+}
+
+.modal {
+	display: none;
+	height: 100%;
+	width: 100%;
+	border: none;
+	padding: 0;
+	background-color: rgba(29, 29, 29, 0.85);
+	position: fixed;
+}
+
+.popup {
+	position: static;
+	display: flex;
+	flex-direction: column;
+	width: 48vw;
+	align-items: center;
+	margin: 14vh auto 0;
+	background-color: #fefdfd;
+	border-radius: 10px;
+}
+
+.fade-in {
+	animation: fade-in 0.8s ease-out;
+}
+
+.fade-out {
+	animation: fade-out 0.5s ease-out;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+#fav-color h4 {
+	margin: 32px 0 18px;
+	font-size: calc(15px + 1.8vw);
+	font-weight: 400;
+	border-bottom: 1px solid #232323;
+	padding: 0 4vw;
+}
+
+#fav-color #color-options {
+	width: 84%;
+	margin: 0 10px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+#fav-color #color-options h5 {
+	display: inline;
+	margin: 8px 0 8px;
+	font-size: calc(6px + 0.6vw);
+	font-weight: 500;
+}
+
+#fav-color #color-options .color-option {
+	margin: 0.2vh 0.4vw;
+	width: 5vw;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+}
+
+#fav-color #color-options .color-preview {
+	height: calc(16px + 1.7vw);
+	width: calc(16px + 1.7vw);
+	border-radius: 100px;
+	padding: 0;
+	display: flex;
+
+	justify-content: center;
+
+	align-content: center;
+
+	flex-direction: column;
+}
+
+#fav-color #color-options .color-preview:hover,
+.selectedColor {
+	opacity: 0.8;
+	border: 5px solid gray;
+	padding: 0.5px;
+}
+
+#fav-color #color-options .checkmark {
+	color: white;
+	font-size: 1.2vw;
+}
+
+#fav-color #update-theme-button {
+	margin: 24px 0 20px;
+	padding: 10px 26px;
+	font-size: calc(8px + 1.3vw);
+	border: 3px solid #232323;
+	color: #232323;
+	background-color: #fff;
+}
+
+#fav-color #update-theme-button:hover {
+	opacity: 0.4;
+	border-color: transparent;
+	background-color: #e1e1e1;
+}
+
+#make-note {
+	display: flex;
+	place-content: center;
+	text-align: center;
+	margin: 0px auto;
+	width: 50%;
+}
+
+#make-note h4 {
+	text-align: center;
+	margin: 30px 0 16px;
+	font-size: calc(16px + 1.5vw);
+	font-weight: 300;
+}
+
+#make-note #edit-post-it {
+	height: 340px;
+	width: 85%;
+	font-size: 2.6vw;
+	padding: 14px;
+	border: 1px solid #d8d8d8;
+	border-radius: 10px;
+	outline: none;
+	resize: none;
+}
+
+#make-note .post-it-button {
+	display: inline;
+	margin: 14px 0 20px;
+	padding: 10px 26px;
+	font-size: calc(12px + 0.6vw);
+	font-weight: 400;
+}
+
+#make-note #add-post-it {
+	border: 3px solid #222;
+}
+
+#make-note #add-post-it:hover {
+	color: white;
+	background-color: #222;
+}
+
+#make-note #delete-button {
+	color: white;
+	border: 3px solid #d71c1f;
+	background-color: #d71c1f;
+}
+
+#make-note #delete-button:hover {
+	color: #d71c1f;
+	border: 3px solid #d71c1f;
+	background-color: white;
+}
+
+@media (orientation: portrait) {
+	body {
+		flex-direction: column;
+	}
+
+	.time {
+		display: none;
+	}
+
+	#calender {
+		width: 100%;
+		justify-content: none;
+		min-height: initial;
+	}
+	#calender img {
+		/* width: 2rem */
+		display: none;
+	}
+	table {
+
+		font-size: 0.8rem;
+	}
+
+	#calender .weekday {
+		font-size: 0.8rem;
+	}
+
+	#calender #cal-year {
+		font-size: 1.2rem;
+	}
+
+	#calender #cal-month {
+		font-size: 1rem;
+	}
+
+	#calender td {
+		font-size: 0.8rem !important;
+		font-weight: 300;
+	}
+
+	#current-day-info {
+		min-height: initial;
+		height: 13vh;
+		width: 100%;
+		padding: 2vw 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		align-content: center;
+	}
+
+	#current-day-info .current-day-heading {
+		display: inline;
+		padding: 0;
+		margin: 0 4px;
+		font-size: 5vw;
+	}
+
+	#current-day-info .current-month-heading {
+		display: inline;
+		padding: 0;
+		margin: 0 4px;
+		font-size: 5vw;
+	}
+
+	#current-day-info .current-date-heading {
+		display: inline;
+		padding: 0;
+		margin: 0 4px;
+		font-size: 5vw;
+	}
+
+	#current-day-info #app-name-landscape {
+		padding: 3vh 0 1vh;
+		border-bottom: 1px solid;
+		display: none;
+		color: white;
+	}
+
+	#current-day-info h2 {
+		font-size: 3vh;
+	}
+
+	#current-day-info h1 {
+		font-size: 4vh;
+	}
+
+	#current-day-info #theme-landscape {
+		display: none;
+	}
+
+	#calender #theme-portrait {
+		display: block;
+		width: 75%;
+		border-radius: 100px;
+	}
+
+	#calender #app-name-portrait {
+		display: block;
+	}
+
+	#calender tbody td {
+		height: 7.2vw;
+		width: 9.2vw;
+	}
+}
+
+@media (orientation: portrait) {
+	.popup {
+		width: 87vw;
+	}
+
+	#fav-color .popup h4 {
+		text-align: center;
+	}
+
+	#fav-color #color-options .color-option {
+		width: 8vw;
+	}
+
+	/* #make-note .popup h4 {} */
+
+	#make-note {
+		width: 75%;
+	}
+
+	#make-note #edit-post-it {
+		height: 200px;
+		width: 85%;
+	}
+}
+
+.fa-sticky-note {
+	color: rgba(255, 187, 61, 0.5);
+	font-size: 2rem;
+}
+
+.note-title {
+	width: 85%;
+	font-size: 1.6vw;
+	padding: 14px;
+	border: 1px solid #d8d8d8;
+	border-radius: 10px;
+	outline: none;
+}
+
+#todayLogo {
+	width: 3rem;
+	top: 0.8vw;
+	left: 1px;
+}
+
+</style>
+<body>
+	<div id="current-day-info" class="color">
+
+
+		<div>
+			<h2 id="current-year" class="center default-cursor">2019</h2>
+		</div>
+
+		<div>
+			<h1 id="cur-day" class="current-day-heading center default-cursor">
+				Monday
+			</h1>
+			<h1 id="cur-month" class="current-month-heading center default-cursor">
+				June
+			</h1>
+			<h1 id="cur-date" class="current-date-heading center default-cursor">
+				7
+			</h1>
+		</div>
+
+		<div class="time">
+			<span> 22 </span>: <span> 55 </span>:
+			<span> 23 </span>
+		</div>
+
+		<button id="theme-landscape" class="font btn">Change Theme</button>
+	</div>
+
+	<div id="calender">
+		<h1 id="app-name-portrait" class="center ">JSCalender</h1>
+		<!-- h1 'off-color' class was removed -->
+		<table>
+			<thead class="color">
+				<tr>
+					<th colspan="7" class="border-color">
+						<h4 id="cal-year" contenteditable="true">2018</h4>
+						<div>
+							<i class="fas fa-caret-left icon"> </i>
+							<h3 id="cal-month">july</h3>
+							<i class="fas fa-caret-right icon"> </i>
+						</div>
+					</th>
+				</tr>
+
+				<tr>
+					<th class="weekday border-color">Sun</th>
+					<th class="weekday border-color">Mon</th>
+					<th class="weekday border-color">Tue</th>
+					<th class="weekday border-color">Wed</th>
+					<th class="weekday border-color">Thu</th>
+					<th class="weekday border-color">Fri</th>
+					<th class="weekday border-color">Sat</th>
+				</tr>
+			</thead>
+
+			<tbody id="table-body">
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td class="tooltip-container">
+						<span class="day">1</span>
+						<span class="tooltip"> this is pretty tooltip</span>
+					</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+			</tbody>
+		</table>
+		<button id="theme-portrait" class="font btn">Change Theme</button>
+	</div>
+
+	<div class="modal">
+		<div id="fav-color" hidden>
+			<div class="popup">
+				<h4>whats your favorite color ?</h4>
+
+				<div id="color-options">
+					<div class="color-option">
+						<div class="color-preview" id="blue" style="background-color: #1B19CD;">
+							<!-- <i class="fas fa-check checkmark"></i> -->
+						</div>
+						<h5>Blue</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="red" style="background-color: #D01212;"></div>
+						<h5>Red</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="purple" style="background-color: #721D89;"></div>
+						<h5>Purple</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="green" style="background-color: #158348;"></div>
+						<h5>Green</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="orange" style="background-color: #EE742D;"></div>
+						<h5>Orange</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="deep-orange" style="background-color: #F13C26;"></div>
+						<h5>Deep Orange</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="baby-blue" style="background-color: #31B2FC;"></div>
+						<h5>Baby Blue</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="cerise" style="background-color: #EA3D69;"></div>
+						<h5>Cerise</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="lime" style="background-color: #36C945;"></div>
+						<h5>Lime</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="teal" style="background-color: #2FCCB9;"></div>
+						<h5>Teal</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="pink" style="background-color: #F50D7A;"></div>
+						<h5>Pink</h5>
+					</div>
+
+					<div class="color-option">
+						<div class="color-preview" id="black" style="background-color: #212524;"></div>
+						<h5>Black</h5>
+					</div>
+				</div>
+
+				<button id="update-theme-button" class="font btn color">
+					Update Theme
+				</button>
+			</div>
+		</div>
+
+		<div id="make-note" hidden>
+			<div class="popup">
+				<h4> <span class="verb"></span> note on <span id="noteDate">2019 12 5</span></h4>
+				<input class="note-title" type="text" name="title" placeholder="note title ..." />
+				<textarea class="note-content" id="edit-post-it" name="post-it"
+					placeholder="note description ..."></textarea>
+				<span style="color:red;" id="warning"></span>
+				<div>
+					<button class="btn font post-it-button" id="add-post-it">
+						Save
+					</button>
+					<button class="btn font post-it-button" id="delete-button">
+						Delete
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const currentDayDOM = document.getElementById("cur-day"),
+	currentMonthDOM = document.getElementById("cur-month"),
+	calenderMonthDOM = document.getElementById("cal-month"),
+	currentDateDOM = document.getElementById("cur-date"),
+	calenderYearDOM = document.getElementById("cal-year"),
+	currentYearDOM = document.getElementById("current-year"),
+	noteDateInPopup = document.getElementById("noteDate"),
+	saveBtnInPopup = document.getElementById("add-post-it"),
+	deleteBtnInPopup = document.getElementById("delete-button"),
+	noteContentInput = document.querySelector(".note-content"),
+	noteTitleInput = document.querySelector(".note-title"),
+	verb = document.querySelector(".verb"),
+	modal = document.querySelector(".modal"),
+	colorModal = document.getElementById("fav-color"),
+	popup = document.querySelector(".popup"),
+	noteModal = document.getElementById("make-note");
+
+document.querySelector(".fa-caret-left").addEventListener("click", nextMonth);
+document.querySelector(".fa-caret-right").addEventListener("click", prevMonth);
+
+const now = new Date();
+//for testing purposes use 'let' instead of 'const'
+const todayDay = now.getDay(),
+	todayDate = now.getDate(),
+	todayMonth = now.getMonth(),
+	todayYear = now.getFullYear();
+
+const state = {
+	todayDay,
+	todayDate,
+	todayMonth,
+	todayYear
+};
+const daysStr = {
+	0: "Sun",
+	1: "Mon",
+	2: "Tue",
+	3: "Wed",
+	4: "Thu",
+	5: "Fri",
+	6: "Sat"
+};
+const daysIndex = {
+	Sun: 0,
+	Mon: 1,
+	Tue: 2,
+	Wed: 3,
+	Thu: 4,
+	Fri: 5,
+	Sat: 6
+};
+const monthsStr = {
+	0: "Jan",
+	1: "Feb",
+	2: "Mar",
+	3: "Apr",
+	4: "May",
+	5: "Jun",
+	6: "Jul",
+	7: "Aug",
+	8: "Sep",
+	9: "Oct",
+	10: "Nov",
+	11: "Dec"
+};
+const monthsIndex = {
+	Jan: 0,
+	Feb: 1,
+	Mar: 2,
+	Apr: 3,
+	May: 4,
+	Jun: 5,
+	Jul: 6,
+	Aug: 7,
+	Sep: 8,
+	Oct: 9,
+	Nov: 10,
+	Dec: 11
+};
+const color_data = [
+	{
+		id: 0,
+		name: "blue",
+		value: "#1B19CD"
+	},
+	{
+		id: 1,
+		name: "red",
+		value: "#D01212"
+	},
+	{
+		id: 2,
+		name: "purple",
+		value: "#721D89"
+	},
+	{
+		id: 3,
+		name: "green",
+		value: "#158348"
+	},
+	{
+		id: 4,
+		name: "orange",
+		value: "#EE742D"
+	},
+	{
+		id: 5,
+		name: "deep-orange",
+		value: "#F13C26"
+	},
+	{
+		id: 6,
+		name: "baby-blue",
+		value: "#31B2FC"
+	},
+	{
+		id: 7,
+		name: "cerise",
+		value: "#EA3D69"
+	},
+	{
+		id: 8,
+		name: "lime",
+		value: "#2ACC32"
+	},
+	{
+		id: 9,
+		name: "teal",
+		value: "#2FCCB9"
+	},
+	{
+		id: 10,
+		name: "pink",
+		value: "#F50D7A"
+	},
+	{
+		id: 11,
+		name: "black",
+		value: "#212524"
+	}
+];
+
+var currentColor;
+
+let staticCurrentColor = {
+	id: 0,
+	name: color_data[0].name,
+	value: color_data[0].value
+};
+
+var notes;
+let staticNotes = [
+	{
+		id: 235684345,
+		title: "running marathon",
+		desc:
+			"blah lbah lorem ipsum sodem qwerty oiuy lorem ipsum sodem qwerty oiuy",
+		date: "2019 10 31"
+	},
+	{
+		id: 784534534,
+		title: "The Burger Chief opening event",
+		desc: "lorem ipsum sodem qwerty oiuy lorem ipsum sodem qwerty oiuy",
+		date: "2019 10 2"
+	},
+	{
+		id: 345463516,
+		title: "Jamal's Birthday",
+		desc: "lorem ipsum sodem qwerty oiuy lorem ipsum sodem qwerty oiuy",
+		date: "2019 11 22"
+	}
+];
+
+let notesFound = localStorage.getItem("notes");
+let colorsFound = localStorage.getItem("theme");
+
+if (!notesFound) {
+	console.log("notes not Found");
+	localStorage.setItem("notes", JSON.stringify(staticNotes));
+	notes = staticNotes;
+} else {
+	notes = JSON.parse(notesFound);
+}
+
+if (!colorsFound) {
+	console.log("colors not Found:");
+	localStorage.setItem("theme", JSON.stringify(staticCurrentColor));
+	currentColor = staticCurrentColor;
+} else {
+	currentColor = JSON.parse(colorsFound);
+	applyTheme();
+}
+
+//update local storage
+function updateLocalStorage() {
+	let currentNotes = notes;
+	localStorage.setItem("notes", JSON.stringify(currentNotes));
+	localStorage.setItem("theme", JSON.stringify(currentColor));
+	applyTheme();
+}
+
+function applyTheme() {
+	document.querySelector(
+		"table"
+	).style.boxShadow = `0px 0px 149px -28px ${currentColor.value}`;
+
+	document.querySelector(
+		".color"
+	).style.backgroundColor = `${currentColor.value}`;
+
+	document.querySelector(
+		".border-color"
+	).style.backgroundColor = `${currentColor.value}`;
+
+	for (let i = 0; i < 7; i++) {
+		document.querySelectorAll(".weekday")[
+			i
+		].style.backgroundColor = `${currentColor.value}`;
+	}
+}
+
+currentDayDOM.innerHTML = daysStr[todayDay];
+currentDateDOM.innerHTML = todayDate;
+currentMonthDOM.innerHTML = monthsStr[state.todayMonth];
+currentYearDOM.innerHTML = todayYear;
+var currentFullYear = analyizYear(state.todayYear);
+var currentFullMonth = currentFullYear.months[monthsStr[state.todayMonth]];
+
+//run App
+showCalenderInfo();
+
+//exp: analyizYear(2019) will get you all months length,first day,last day with indexes
+function analyizYear(year) {
+	let counter = 0;
+	const currentYear = {
+		year: year,
+		is_leap: false,
+		months: {
+			Jan: 0,
+			Feb: 1,
+			Mar: 2,
+			Apr: 3,
+			May: 4,
+			Jun: 5,
+			Jul: 6,
+			Aug: 7,
+			Sep: 8,
+			Oct: 9,
+			Nov: 10,
+			Dec: 11
+		}
+	};
+
+	while (counter < 12) {
+		Object.keys(currentYear.months).forEach(month => {
+			currentYear.months[month] = analyizMonth(month, year);
+		});
+		counter++;
+	}
+	if (currentYear.months["Feb"].days_length === 29) {
+		currentYear.is_leap = true;
+	}
+	return currentYear;
+}
+//exp: run analyizMonth(String:'Dec',Int:2019) note:(must capitalize month like Sep,Nov)
+function analyizMonth(month, year) {
+	const testDays = 31;
+	let counter = 0;
+
+	const monthObj = {
+		year: year,
+		month: month,
+		month_idx: monthsIndex[month],
+		first_day: "",
+		first_day_index: null,
+		days_length: 0,
+		last_day_index: null
+	};
+
+	while (counter < testDays) {
+		counter++;
+		const dateTest = `${counter} ${month} ${year}`;
+		const dateArr = new Date(dateTest).toDateString().split(" ");
+		if (dateArr[1] === month) {
+			if (counter === 1) {
+				monthObj.first_day = dateArr[0];
+				monthObj.first_day_index = daysIndex[dateArr[0]];
+			}
+			monthObj.days_length++;
+			monthObj.last_day = dateArr[0];
+			monthObj.last_day_index = daysIndex[dateArr[0]];
+		} else {
+			return monthObj;
+		}
+	}
+	return monthObj;
+}
+
+//get last month days in current month view
+function makePrevMonthArr(firstDayIndex) {
+	let prevMonthIdx;
+	let prevMonthDays;
+	if (state.todayMonth === 0) {
+		prevMonthDays = analyizMonth("Dec", state.todayYear - 1).days_length;
+	} else {
+		prevMonthIdx = monthsIndex[currentFullMonth.month] - 1;
+		prevMonthDays = currentFullYear.months[monthsStr[prevMonthIdx]].days_length;
+	}
+	let result = [];
+	for (let i = 1; i <= firstDayIndex; i++) {
+		const day = prevMonthDays - firstDayIndex + i;
+		result.push({ day, state: "prevMonth" });
+	}
+
+	return result;
+	//**** previous version of this code was returning just days without state
+	//**** like [1,2,3] instead of day and its state like [{day:1,"prevMonth"}]
+	// return Array.from(
+	// 	{ length: firstDayIndex },
+	// 	(_, i) => prevMonthDays - firstDayIndex + i
+	// );
+}
+// this will print an array of with days of prev month and next month crosponds to the calender table
+function calcMonthCalendar() {
+	// Create array: [1, 2, 3, ..., 30, 31]
+	const currMonth = Array.from(
+		{ length: currentFullMonth.days_length },
+		(_, i) => ({ day: i + 1, state: "currMonth" })
+	);
+
+	const nextMonth = Array.from(
+		{ length: currentFullMonth.days_length },
+		(_, i) => ({ day: i + 1, state: "nextMonth" })
+	);
+
+	// Create a flat array with leading zeros and trailing last week:
+	// [0, 0, 0, 0, 1, 2, 3, ..., 30, 31, 1, 2, 3, 4, 5, 6, 7]
+	const flatResultArr = [
+		...makePrevMonthArr(currentFullMonth.first_day_index),
+		...currMonth,
+		...nextMonth // this includes extra numbers that will be trimmed
+	].slice(0, 7 * 6); // 7 days/week * 6 weeks
+
+	// Chunk the flat array into slices of 7:
+	const resultArr = [];
+	for (let i = 0; i < 7; i++) {
+		resultArr.push(flatResultArr.slice(i * 7, (i + 1) * 7));
+	}
+	return resultArr;
+}
+
+// print each cell its day number and color
+function printMonthCalendarInDOM() {
+	const monthArr = calcMonthCalendar();
+
+	let currentMonthStarted = false;
+	let currentMonthEnd = true;
+	for (let i = 0; i < 6; i++) {
+		let currentWeek = monthArr[i];
+		//
+		const week = document.querySelector("#table-body").children[i];
+		for (let j = 0; j < 7; j++) {
+			week.children[j].style.backgroundColor = "white";
+			week.children[j].style.opacity = 1;
+			// console.log(currentWeek[j].day);
+			if (currentWeek[j].day === 1) {
+				currentMonthStarted = true;
+			}
+			if (
+				currentMonthEnd &&
+				currentMonthStarted &&
+				currentWeek[j].day === todayDate &&
+				currentFullMonth.month_idx === todayMonth &&
+				currentFullYear.year === todayYear
+			) {
+				let todayFullDate =
+					state.todayYear +
+					" " +
+					(state.todayMonth + 1) +
+					" " +
+					state.todayDate;
+				let isTodayHasNotes = notes.filter(note => note.date === todayFullDate);
+				let viewNote = "";
+				if (isTodayHasNotes.length > 0) {
+					viewNote = `
+							
+							<br>
+							<div style="width:max-content;">
+							<i class="fas fa-sticky-note"></i>
+							</div>
+							<span class="tooltip"> ${isTodayHasNotes[0].title}</span>
+						
+							`;
+					week.children[j].classList.add("tooltip-container");
+				}
+				// week.children[j].innerHTML = viewNote;
+				// week.children[j].id = notesFound.id;
+
+				week.children[
+					j
+				].innerHTML = `${currentWeek[j].day} ${viewNote}`;
+				// week.children[j].innerHTML = currentWeek[j].day;
+				week.children[j].id = "current-day";
+				week.children[j].classList.add("currMonth");
+				week.children[j].style.backgroundColor = "#e1e1e1";
+				currentMonthStarted = false;
+				currentMonthEnd = false;
+			} else {
+				week.children[j].style.cursor = "";
+				week.children[j].style.backgroundColor = "white"; //.style.backgroundColor = "white";
+				week.children[j].style.color = "black";
+				week.children[j].innerHTML = currentWeek[j].day;
+				week.children[j].removeAttribute("id");
+				if (currentWeek[j].state !== "currMonth") {
+					week.children[j].style.backgroundColor = currentColor.value;
+					week.children[j].style.opacity = 0.6;
+					week.children[j].style.color = "rgba(255, 255, 255,0.4)";
+					week.children[j].style.cursor = "default";
+					week.children[j].classList.remove("currMonth");
+					week.children[j].classList.remove("tooltip-container");
+				}
+				if (currentWeek[j].state == "currMonth") {
+					//exp 2019 10 24
+					week.children[j].classList.add("currMonth");
+					let currentFullDate =
+						currentFullMonth.year +
+						" " +
+						(currentFullMonth.month_idx + 1) +
+						" " +
+						currentWeek[j].day;
+					let notesFound = notes.filter(
+						note => note.date === currentFullDate
+					)[0];
+					if (notesFound) {
+						let viewNote = `
+						<td>
+						<span class="day">${currentWeek[j].day}</span>
+						<br>
+						<div style="width:max-content;">
+						<i class="fas fa-sticky-note"></i>
+						</div>
+						<span class="tooltip"> ${notesFound.title}</span>
+					</td>
+						`;
+						week.children[j].innerHTML = viewNote;
+						week.children[j].classList.add("tooltip-container");
+						week.children[j].id = notesFound.id;
+					} else {
+						week.children[j].classList.remove("tooltip-container");
+					}
+				}
+			}
+			// console.log("xZx: ", currentWeek[j]);
+		}
+	}
+}
+
+function nextMonth() {
+	state.todayMonth += 1;
+	if (state.todayMonth == 12) {
+		state.todayYear += 1;
+		currentFullYear = analyizYear(state.todayYear);
+		state.todayMonth = 0;
+	}
+	currentFullMonth = currentFullYear.months[monthsStr[state.todayMonth]];
+	showCalenderInfo();
+}
+
+function prevMonth() {
+	state.todayMonth -= 1;
+	if (state.todayMonth == 0) {
+		state.todayYear -= 1;
+		currentFullYear = analyizYear(state.todayYear);
+		state.todayMonth = 11;
+	}
+	currentFullMonth = currentFullYear.months[monthsStr[state.todayMonth]];
+	showCalenderInfo();
+}
+
+function showCalenderInfo() {
+	calenderMonthDOM.innerHTML = monthsStr[state.todayMonth];
+	calenderYearDOM.innerHTML = state.todayYear;
+	printMonthCalendarInDOM();
+}
+
+// to change the year manually
+calenderYearDOM.addEventListener("input", e => {
+	let numberPattern = /\d+/g;
+	let year = parseInt(e.target.innerHTML.match(numberPattern).join(""));
+	if (
+		e.target.innerHTML.match(numberPattern).join("").length > 3 &&
+		typeof year === "number"
+	) {
+		currentFullYear = analyizYear(year);
+		currentFullMonth = currentFullYear.months[monthsStr[state.todayMonth]];
+		state.todayYear = year;
+		showCalenderInfo();
+	}
+});
+
+document
+	.getElementById("theme-landscape")
+	.addEventListener("click", changeColorTheme);
+document
+	.getElementById("theme-portrait")
+	.addEventListener("click", changeColorTheme);
+
+let newColorPrefrence;
+modal.addEventListener("click", e => {
+	let ele = e.target.classList;
+
+	if (ele[0] === "modal" || ele[0] === "fade-in") {
+		closeModal();
+	} else if (ele[0] === "color-preview") {
+		const siblings = e.target.parentElement.parentElement;
+		for (let i = 0; i < siblings.children.length; i++) {
+			const element = siblings.children[i].firstElementChild;
+			element.classList.remove("selectedColor");
+		}
+		if (e.target.parentElement.classList[0] === "color-option") {
+			newColorPrefrence = e.target.id;
+		}
+		ele.add("selectedColor");
+	}
+});
+
+let isModalOpen = false;
+
+function openModal(isNote = false) {
+	isModalOpen = true;
+	popup.classList.remove("fade-out");
+	modal.style.display = "block";
+
+	isNote
+		? (noteModal.style.display = "flex")
+		: (colorModal.style.display = "flex");
+	popup.classList.add("fade-in");
+}
+closeModal();
+function closeModal() {
+	isModalOpen = false;
+	popup.classList.remove("fade-in");
+	popup.classList.add("fade-out");
+	modal.style.display = "none";
+	noteModal.style.display = "none";
+	colorModal.style.display = "none";
+	deleteBtnInPopup.style.display = "inline";
+	noteTitleInput.value = "";
+	noteContentInput.value = "";
+	document.getElementById("warning").innerHTML = "";
+}
+
+function changeColorTheme() {
+	openModal();
+	seletectChosenColor();
+}
+
+seletectChosenColor();
+
+function seletectChosenColor() {
+	const colorsOptions = document.getElementById("color-options").children;
+	for (let i = 0; i < colorsOptions.length; i++) {
+		const currentChild = colorsOptions[i].firstElementChild;
+
+		if (currentColor.name == currentChild.id) {
+			currentChild.innerHTML = "<i class='fas fa-check checkmark'></i>";
+		} else {
+			currentChild.innerHTML = "";
+		}
+	}
+}
+document.getElementById("update-theme-button").addEventListener("click", () => {
+	const chosenColor = color_data.filter(
+		color => color.name === newColorPrefrence
+	);
+	currentColor = chosenColor[0];
+	document.getElementById("theme-portrait").style.backgroundColor =
+		currentColor.value;
+	updateLocalStorage();
+	printMonthCalendarInDOM();
+	applyTheme();
+	closeModal();
+});
+
+
+function fillNotePopup(note) {
+	noteTitleInput.value = note.title;
+	noteContentInput.value = note.desc;
+}
+
+var getSelectedNoteDay;
+var getSelectedNoteId;
+
+function addNote(noteDateDay, noteDateId) {
+	getSelectedNoteDay = noteDateDay;
+	getSelectedNoteId = noteDateId;
+}
+
+saveBtnInPopup.addEventListener("click", () => {
+	const noteDate =
+		currentFullMonth.year +
+		" " +
+		(currentFullMonth.month_idx + 1) +
+		" " +
+		getSelectedNoteDay;
+	let oldNote = notes.filter(note => note.date == noteDate)[0];
+	if (oldNote) {
+		notes = notes.filter(note => oldNote.id !== note.id);
+	}
+
+
+	if (
+		noteTitleInput.value.trim() !== "" &&
+		noteTitleInput.value.trim() !== " " &&
+		(noteContentInput.value.trim() !== "" &&
+			noteContentInput.value.trim() !== " ")
+	) {
+		console.log("newNote:", newNote);
+		notes.push(newNote);
+		closeModal(true);
+		printMonthCalendarInDOM();
+		updateLocalStorage();
+	} else {
+		document.getElementById("warning").innerHTML = "Please fill all fields";
+	}
+});
+
+//mini clock 12 and 24 timing
+let is24hours = true;
+let intervalState;
+function makeClockTikTok() {
+	intervalState = setInterval(() => {
+		let hours = new Date().getHours();
+		const minutes = new Date().getMinutes();
+		const seconds = new Date().getSeconds();
+		// console.log("seconds:", seconds);
+		let in12hours = 12;
+		let dayState = "AM";
+
+		if (hours > 0 && hours < 12) {
+			in12hours = hours;
+		} else if (hours !== 0) {
+			if (hours === 12) {
+				hours += 12;
+			}
+			in12hours = hours - 12;
+			dayState = "PM";
+		}
+
+		if (is24hours) {
+			hours = in12hours;
+		}
+		const timeTemplate = `
+		<span>${hours > 9 ? hours : "0" + hours} </span>:
+		<span>${minutes > 9 ? minutes : "0" + minutes} </span>:
+		<span>${seconds > 9 ? seconds : "0" + seconds}</span>
+		<span>${is24hours ? dayState : ""}</span>
+		`;
+		document.querySelector(".time").innerHTML = timeTemplate;
+	}, 1000);
+}
+document
+	.querySelector(".time")
+	.addEventListener(
+		"click",
+		() => ((is24hours = !is24hours), makeClockTikTok())
+	);
+
+//to stop the calculating time if it is on orientation mode
+var mql = window.matchMedia("(orientation: portrait)");
+//if the user launched this app while on portrait mode
+if (!mql.matches) {
+	makeClockTikTok();
+}
+
+// Add a media query change listener
+mql.addListener(function(m) {
+	if (m.matches) {
+		// Changed to portrait
+		console.log("portrait mode");
+		clearInterval(intervalState);
+	} else {
+		// Changed to landscape
+		console.log("landscape mode");
+		makeClockTikTok();
+	}
+});
+
+
+	</script>
+</body>
+</html>

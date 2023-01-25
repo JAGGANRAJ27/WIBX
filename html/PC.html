@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif;}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+}
+
+.sidebar a {
+  padding: 25px 8px 10px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: block;
+  cursor: pointer;
+}
+
+.sidebar a:hover {
+  color: green;
+}
+
+.sidebar a:active {
+  color: mediumspringgreen;
+}
+
+
+.mainbar {
+  height: 100%;
+  width: 80%;
+  position: fixed;
+  z-index: 3;
+  top: -15px;
+  left: 160px;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.mainbar a {
+  padding: 0px 4px 20px 25px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: block;
+  
+}
+
+.mainbar a:hover {
+  color: green;
+}
+
+.mainbar b {
+  border: none;
+  background-color: inherit;
+  padding: 30px 0px 10px 20px;
+  font-size: 16px;
+  display: inline-block;
+  
+  
+ }
+.mainbar b:hover {
+  background:: #eee;
+  cursor: pointer;
+  
+}
+
+
+.mainbar c {
+  padding: 0px 4px 0px 25px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: block;
+  
+}
+
+
+.mainbar d {
+  padding: 0px 4px 0px 0px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: inline-block;
+  
+}
+
+.mainbar d:hover {
+  color: green;
+  cursor: pointer;
+}
+
+
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+  
+  
+@media screen and (max-width: 450px) {
+  .topbar {padding-top: 15px;}
+  .topbar a {font-size: 18px;}
+  
+
+</style>
+</head>
+<body>
+
+<img style="display:none;" id="bigpic" />
+
+<div class="sidebar">
+  <a onclick="openPage('home')" id="Default" target="iframe_a"><i><img src="https://img.icons8.com/ultraviolet/2x/home.png" height="20px" width="20px"></i> Home</a>
+  <a onclick="openPage('projects')"><i><img src="https://img.icons8.com/ultraviolet/2x/code-file.png" height="20px" width="20px"></i> Source Code</a>
+  <a onclick="openPage('Trash')"><i><img src="https://img.icons8.com/ultraviolet/2x/empty-trash.png" height="20px" width="20px"></i> Trash</a>
+</div>
+
+
+<!-- home -->     
+     
+<div class="mainbar" id="home">
+<c>
+<d onclick="openPage('Document')" ><p>Home</p></d>
+</c>
+<b><button ondblclick="" ><i style="font-size:50px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/stack-of-photos.png"></i>
+<p>Photos</p></button></b>
+<b><button ondblclick=""><i style="font-size:50px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/movies-folder.png"></i>
+<p>Videos</p></button></b>
+<b><button ondblclick="" ><i  style="font-size:50px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/musical.png"></i>
+<p>Music</p></button></b>
+</div>     
+
+
+<!-- Source code -->
+<div class="mainbar" id="projects">
+<c><d ><p>Source code </p></d>
+</c>
+<b><button ondblclick="" ><i style="font-size:50px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/html-filetype.png"></i>
+<p>HTML</p></button></b>
+<b><button ondblclick="" ><i style="font-size:50px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/css.png"></i>
+<p>CSS</p></button></b>
+<b><button ondblclick="" ><i style="font-size:50px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/code-file.png"></i>
+<p>JS</p></button></b>
+<b><button ondblclick="" ><i style="font-size:50px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/pictures-folder.png"></i>
+<p>img</p></button></b>
+</div>   
+
+
+<!-- Trash Folder -->
+<div class="mainbar" id="Trash">
+<c><d href="#home" ><p>Trash </p></d>
+</c>
+<b><button ondblclick="empty()" ><i style="font-size:60px;cursor: pointer;"><img src="https://img.icons8.com/ultraviolet/2x/empty-trash.png"></i>
+<p>Empty</p></button></b>
+</div>     
+
+<script>
+function openPage(pageName) {
+  var i;
+  tabcontent = document.getElementsByClassName("mainbar");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  
+  document.getElementById(pageName).style.display = "block";
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("Default").click();
+function empty() {
+  alert("Empty! Nothing Here..");
+}
+</script>
+<script>
+function showPicture() {
+  var sourceOfPicture = "amma.jpg";
+  window.open(sourceOfPicture) 
+  var img = document.getElementById('bigpic')
+} 
+</script>
+</body>
+</html> 
