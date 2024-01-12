@@ -525,11 +525,11 @@ body {
 
 #start-bar {
 	position: fixed;
-	z-index: 100;
+	z-index: 10;
+	padding-bottom: 50px;
 	bottom: 0;
-	right: 0;
-	height: 45px;
-	width: 100%;
+	height: 5vh;
+	width: 100vw;
 	background: rgba(255, 255, 255, 0.2);
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(20px);
@@ -544,19 +544,14 @@ body {
 	width: 45px;
 	top: 0;
 	left: 50%;
-	background: rgba(0, 0, 0, 0) url('img/Boot.png') no-repeat;
+	background: url('img/Boot.png') no-repeat;
 	background-size: 30px;
 	background-position: 10px;
 	opacity: 1;
-	transition: all 0.3s;
 }
 
 #start-bar .win-icon:hover {
-	opacity: 1;
-	background: rgb(0, 59, 59) url('img/Boot.png') no-repeat;
-	background-size: 28px;
-	border-radius: 50%;
-	background-position: 10px;
+	cursor: pointer;
 }
 
 /* Windows clock on the right side */
@@ -576,43 +571,38 @@ body {
 }
 
 #clock:hover {
-	background: rgb(0, 59, 59);
-	cursor: default;
+	background: #b6dcfe;
+	color: #000;
+	cursor: pointer;
+	border-radius: 20px;
 }
 
 /* Logout and Cancel options on click on windows button */
 #logOut {
-	display: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	position: fixed;
 	top: 65%;
 	left: 40%;
-	height: 28%;
-	width: 20%;
+	height: 30vh;
+	width: 20vw;
+	border-radius: 10px;
 	background: rgba(0, 0, 0, 0.8);
 	z-index: 999;
 }
-
-
-#logout-btn {
-	height: auto;
-	width: 10%;
-	min-width: 200px;
-	position: absolute;
-	left: 3%;
-	top: 8%;
-	text-align: left;
-
+.hello
+{
+	display: none;
 }
 
-#logout-btn button,
-#logout-btn a {
-	text-decoration: none;
-	background: rgb(255, 255, 255);
-	margin-top: 20px;
-	padding: 5px 20px;
-	border: none;
-	font-weight: bold;
-	cursor: pointer;
-	font-size: 0.8em;
 
+@media only screen and (max-width: 920px) {
+	body {
+		display:none;
+	}
+	.hello
+	{
+		display: contents;
+	}
 }

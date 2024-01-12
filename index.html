@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>WB Operating System</title>
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
-		<link href="https://fonts.googleapis.com/css?family=Oxygen+Mono" rel="stylesheet"/>
-		<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500" rel="stylesheet"/>
-		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="shortcut icon" href="../img/Boot.png" type="image/x-icon">
-		<link rel="stylesheet" href="style.css" />
 
-	</head>
-	<body class="disable-select">
-		<div id="starting-win">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>WB Operating System</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Oxygen+Mono" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="shortcut icon" href="../img/Boot.png" type="image/x-icon">
+	<link rel="stylesheet" href="style.css" />
+
+</head>
+<div class="hello">
+	<h1>mobile</h1>
+</div>
+
+<body class="disable-select">
+	<div id="starting-win">
 			<img src="img/Boot.png" alt="Starting Windows" /><br />
 			<div class="ring">
 				<div class="indicator-1  indeterminate-ring"></div>
@@ -82,129 +92,128 @@
 				<p id="name">Clock</p>
 			</div>
 		</div>
-		
 
 
-<div id="main" contextmenu="alert('Not Allowed, Sorry!')">
-				<div
-				title="This PC"
-				class="desktop-item"
-				ondblclick="$('#tab').show(); $('.desktop-item').css('background-color','transparent');"
-				onmouseover="hoveredItem(this)"
-				onmouseout="hoveredOut(this)"
-				onclick="selectedItem(this)">
-				<img src="https://img.icons8.com/ultraviolet/2x/monitor.png" alt="This PC" />
-				<p id="name">This PC</p>
-			</div>
-			<div
-				title="Chat"
-				class="desktop-item"
-				ondblclick="$('#tab-calc').show(); $('.desktop-item').css('background-color','transparent');"
-				onmouseover="hoveredItem(this)"
-				onmouseout="hoveredOut(this)"
-				onclick="selectedItem(this)">
-				<img src="https://img.icons8.com/ultraviolet/2x/chat.png" alt="Chat" />
-				<p>Chat</p>
-			</div>			
-			<div
-				title="Calculator"
-				class="desktop-item"
-				ondblclick="$('#tab-todo').show(); $('.desktop-item').css('background-color','transparent');"
-				onmouseover="hoveredItem(this)"
-				onmouseout="hoveredOut(this)"
-				onclick="selectedItem(this)">
-				<img src="https://img.icons8.com/ultraviolet/2x/calculator.png" alt="Info" />
-				<p id="name">Calculator</p>
-			</div>
-			<div
-				title="Calendar"
-				class="desktop-item"
-				ondblclick="$('#tab-cal').show(); $('.desktop-item').css('background-color','transparent');"
-				onmouseover="hoveredItem(this)"
-				onmouseout="hoveredOut(this)"
-				onclick="selectedItem(this)">
-				<img src="https://img.icons8.com/ultraviolet/2x/planner.png" alt="Calendar" />
-				<p id="name">Calendar</p>
-			</div>
-			<div
-				title="Clock"
-				class="desktop-item"
-				ondblclick="$('#tab-clo').show(); $('.desktop-item').css('background-color','transparent');"
-				onmouseover="hoveredItem(this)"
-				onmouseout="hoveredOut(this)"
-				onclick="selectedItem(this)">
-				<img src="https://img.icons8.com/ultraviolet/2x/display.png" alt="Clock" />
-				<p id="name">Clock</p>
-			</div>
+
+	<div id="main" contextmenu="alert('Not Allowed, Sorry!')">
+		<div title="This PC" class="desktop-item"
+			ondblclick="$('#tab').show(); $('.desktop-item').css('background-color','transparent');"
+			onmouseover="hoveredItem(this)" onmouseout="hoveredOut(this)" onclick="selectedItem(this)">
+			<img src="https://img.icons8.com/ultraviolet/2x/monitor.png" alt="This PC" />
+			<p id="name">This PC</p>
+		</div>
+		<div title="Chat" class="desktop-item"
+			ondblclick="$('#tab-calc').show(); $('.desktop-item').css('background-color','transparent');"
+			onmouseover="hoveredItem(this)" onmouseout="hoveredOut(this)" onclick="selectedItem(this)">
+			<img src="https://img.icons8.com/ultraviolet/2x/chat.png" alt="Chat" />
+			<p>Chat</p>
+		</div>
+		<div title="Calculator" class="desktop-item"
+			ondblclick="$('#tab-todo').show(); $('.desktop-item').css('background-color','transparent');"
+			onmouseover="hoveredItem(this)" onmouseout="hoveredOut(this)" onclick="selectedItem(this)">
+			<img src="https://img.icons8.com/ultraviolet/2x/calculator.png" alt="Info" />
+			<p id="name">Calculator</p>
+		</div>
+		<div title="Calendar" class="desktop-item"
+			ondblclick="$('#tab-cal').show(); $('.desktop-item').css('background-color','transparent');"
+			onmouseover="hoveredItem(this)" onmouseout="hoveredOut(this)" onclick="selectedItem(this)">
+			<img src="https://img.icons8.com/ultraviolet/2x/planner.png" alt="Calendar" />
+			<p id="name">Calendar</p>
+		</div>
+		<div title="Clock" class="desktop-item"
+			ondblclick="$('#tab-clo').show(); $('.desktop-item').css('background-color','transparent');"
+			onmouseover="hoveredItem(this)" onmouseout="hoveredOut(this)" onclick="selectedItem(this)">
+			<img src="https://img.icons8.com/ultraviolet/2x/display.png" alt="Clock" />
+			<p id="name">Clock</p>
+		</div>
+	</div>
+
+	<div id="start-bar">
+		<div title="Profile Logout" class="win-icon" onclick="$('#logOut').toggle().fadein(5000);"></div>
+		<div title="Current date and time" id="clock" onclick="$('#tab-clo').show()">
+		</div>
+	</div>
+	<!-- Draggable Tab -->
+	<div id="tab">
+		<div id="tab-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png"
+					height="15px" width="15px"></span> &nbsp This PC <i onclick="$('#tab').hide()"><img
+					src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
+		</div> <br />
+
+
+		<div class="tab-middle">
+			<iframe class="resp-iframe" src="html/PC.html" gesture="media" allow="encrypted-media"
+				allowfullscreen></iframe>
 		</div>
 
-		<div id="start-bar" >
-			<div title="Profile Logout" class="win-icon" onclick="$('#logOut').toggle().fadein(5000);"></div>
-			<div title="Current date and time" id="clock" onclick="$('#tab-clo').show()">
-				<i class="fa fa-spinner fa-spin fa-3x fa-fw" style="color: rgba(255, 255, 255, 0.5)"></i>
-				<span class="sr-only">Loading...</span>
-			</div>
+		<div id="tab-footer">
+			&nbsp 9 folders, 5 files, 5.00 MBss
 		</div>
-<!-- Draggable Tab -->
-		<div id="tab" >
-			<div id="tab-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png" height="15px" width="15px"></span> &nbsp This PC <i onclick="$('#tab').hide()"><img src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
-			</div> <br/> 
-			
-			
-			<div class="tab-middle">
-			<iframe class="resp-iframe" src="html/PC.html" gesture="media"  allow="encrypted-media" allowfullscreen></iframe>
-			</div>
-			
-			<div id="tab-footer">
-				&nbsp 9 folders, 5 files, 5.00 MBss
-			</div>
-		</div>
+	</div>
 	<!-- Chat Tab-->
-		<div id="tab-calc">
-			<div id="tab-calc-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png" height="15px" width="15px"></span> &nbsp Chat<i onclick="$('#tab-calc').hide(); cls();"><img src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
-			</div>
-			<div class="tab-middle-chats2" >
+	<div id="tab-calc">
+		<div id="tab-calc-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png"
+					height="15px" width="15px"></span> &nbsp Chat<i onclick="$('#tab-calc').hide(); cls();"><img
+					src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
+		</div>
+		<div class="tab-middle-chats2">
 			<iframe class="resp2-iframe" src="html/chat.html"></iframe>
-			</div>
 		</div>
+	</div>
 	<!-- calculator-->
-		
-		<div id="tab-todo">
-			<div id="tab-todo-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png" height="15px" width="15px"></span> &nbsp Calculator <i onclick="$('#tab-todo').hide();"><img src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
-			</div>
-			<div class="tab-middle-chats">
+
+	<div id="tab-todo">
+		<div id="tab-todo-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png"
+					height="15px" width="15px"></span> &nbsp Calculator <i onclick="$('#tab-todo').hide();"><img
+					src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
+		</div>
+		<div class="tab-middle-chats">
 			<iframe class="resp2-iframe" src="html/calculator.html" style="border-radius: 0px 0px 20px 20px;"></iframe>
-			</div>	
 		</div>
-		<!-- calender -->
+	</div>
+	<!-- calender -->
 
-		<div id="tab-cal">
-			<div id="tab-cal-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png" height="15px" width="15px"></span> &nbsp Calender <i onclick="$('#tab-cal').hide();"><img src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
-			</div>
-			<div class="tab-middle-chats">
+	<div id="tab-cal">
+		<div id="tab-cal-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png"
+					height="15px" width="15px"></span> &nbsp Calender <i onclick="$('#tab-cal').hide();"><img
+					src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
+		</div>
+		<div class="tab-middle-chats">
 			<iframe class="resp2-iframe" src="html/calender.html" style="border-radius: 0px 0px 20px 20px;"></iframe>
-			</div>	
 		</div>
-		<!-- clock -->
+	</div>
+	<!-- clock -->
 
-		<div id="tab-clo">
-			<div id="tab-clo-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png" height="15px" width="15px"></span> &nbsp Clock <i onclick="$('#tab-clo').hide();"><img src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
-			</div>
-			<div class="tab-middle-chats">
+	<div id="tab-clo">
+		<div id="tab-clo-header" class="tab-header"><span><img src="https://img.icons8.com/parakeet/512/approval.png"
+					height="15px" width="15px"></span> &nbsp Clock <i onclick="$('#tab-clo').hide();"><img
+					src="https://img.icons8.com/fluency/2x/delete-sign.png" height="15px" width="15px"></i>
+		</div>
+		<div class="tab-middle-chats">
 			<iframe class="resp2-iframe" src="html/clock.html" style="border-radius: 0px 0px 20px 20px;"></iframe>
-			</div>	
 		</div>
-		
-		<div id="logOut">
-			<div id="logout-btn">
-				<br><br><br>
-				<button onClick="$('#logOut').fadeOut();localStorage.clear();alert('Your are log out successfully');window.location.reload();">Logout</button>
-				<br/>
-			</div>	
+	</div>
+
+	<div id="logOut">
+		<div id="logout-btn">
+			<button type="button" class="btn btn-danger"
+				onClick="$('#logOut').fadeOut();localStorage.clear();alert('Your are log out successfully');window.location.reload();">Logout</button>
+			<br />
 		</div>
-		<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="njwebdesigning" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<script src="script.js"></script>
-	</body>
+	</div>
+
+	<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+		data-id="njwebdesigning" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F"
+		data-position="Right" data-x_margin="35" data-y_margin="60"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="script.js"></script>
+</body>
+
 </html>
+
+
+
+
+
+
